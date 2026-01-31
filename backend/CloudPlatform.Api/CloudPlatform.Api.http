@@ -1,0 +1,8 @@
+@CloudPlatform.Api_HostAddress = http://localhost:5140
+
+GET {{CloudPlatform.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+
+
+###
