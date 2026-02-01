@@ -1,102 +1,51 @@
-# Cloud Self-Service Platform (Proof of Concept)
+# Cloud Self-Service Platform (PoC)
 
-This repository contains a proof-of-concept cloud platform designed to demonstrate how internal development teams can provision cloud environments through a governed, API-driven self-service solution.
+Dette projekt er en Proof-of-Concept på en **Internal Developer Platform (IDP)**. Formålet er at demonstrere, hvordan man kan give udviklere i en organisation som Norlys adgang til cloud-ressourcer via en kontrolleret "Self-Service" portal, der balancerer fart med governance.
 
-The project is inspired by enterprise-scale cloud platform patterns used in large organizations.
-
----
-
-## Purpose
-
-The purpose of this project is to showcase:
-- API-first platform design
-- Cloud self-service concepts
-- Automation and governance thinking
-- Separation of concerns between platform, application, and infrastructure
-
-The focus is on **platform engineering principles**, not on building a production-ready application.
+> **Mål:** At skabe en "Golden Path", hvor udviklere kan bestille specifikke værktøjer (GPU-maskiner, databaser, web-apps) uden manuel ventetid.
 
 ---
 
-## Architecture Overview
+## 🏗️ Arkitektur & Teknologi
 
-```
-[ React Portal ]
-      |
-      v
-[ ASP.NET Core Platform API ]
-      |
-      v
-[ Provisioning Layer (Terraform / Mock) ]
-      |
-      v
-[ Azure / AWS ]
-```
+Projektet er bygget med fokus på **Cloud Native** principper og separation of concerns:
 
-### Components
-- **Frontend**: React-based self-service portal
-- **Backend**: ASP.NET Core API providing platform services
-- **Infrastructure**: Infrastructure-as-Code (Terraform or mocked provisioning)
-- **CI/CD**: GitHub Actions
+- **Frontend:** React (Vite) – En dynamisk portal, hvor brugere vælger ressourcetype, miljø og cloud-provider.
+- **Backend:** .NET 8 API – En orkestreringsenhed, der mapper brugerønsker til specifikke infrastruktur-konfigurationer.
+- **Containerization:** Docker & Docker Compose – Hele platformen er containeriseret for nem udrulning.
 
 ---
 
-## Functional Scope
+## 🚀 Key Features (Targeting Norlys Cloud Platforms)
 
-- Request provisioning of cloud environments (e.g. dev / prod)
-- API-driven workflow with validation and policy checks
-- Asynchronous provisioning simulation or IaC-based provisioning
-- Basic status tracking
-
----
-
-## Non-goals (Intentional)
-
-The following are explicitly out of scope for this PoC:
-- Production-grade UI or design
-- Full identity integration (Azure AD implemented conceptually)
-- Complete cloud resource coverage
-- Advanced cost management implementation
-
-These are excluded to keep the focus on **platform architecture and design decisions**.
+- **Dynamisk Provisionering:** API'et skelner mellem forskellige ressourcebehov (f.eks. CPU vs. GPU) og returnerer automatisk de korrekte adgangslinks.
+- **Environment Awareness:** Adskillelse af `Development`, `Staging` og `Production` for at sikre korrekt skalering og sikkerhedspolitikker.
+- **Actionable Responses:** Systemet returnerer direkte adgangsprotokoller (f.eks. `vscode://` for ML-arbejde eller `jdbc://` for databaser) for at minimere friktion for udvikleren.
+- **FinOps & Governance:** Forberedt til automatisk tagging og "auto-shutdown" logik for at kontrollere cloud-omkostninger.
 
 ---
 
-## Security and Governance (Conceptual)
+## 🛠️ Sådan køres projektet (Local Dev Experience)
 
-The platform is designed with the following principles in mind:
-- API authentication via tokens (JWT / OAuth2 conceptually)
-- Role-based access control (RBAC)
-- Naming conventions and mandatory tagging
-- Least-privilege access
+Platformen kører fuldt containeriseret for at sikre, at det også "virker på din maskine".
 
----
+1. Sørg for at have **Docker Desktop** kørende.
+2. Åbn en terminal i projektets rodmappe.
+3. Kør følgende kommando:
+   ```bash
+   docker-compose up --build
+4. Adgang:
 
-## Technology Stack
+    Portal (Frontend): http://localhost:5173
 
-- **Backend**: ASP.NET Core (Minimal APIs)
-- **Frontend**: React
-- **Infrastructure**: Terraform (or mocked provisioning)
-- **Containerization**: Docker
-- **CI/CD**: GitHub Actions
+    API (Backend): http://localhost:5140/swagger
 
----
+## 📈 Enterprise Use-Cases i denne PoC
+Data Science: Bestilling af en ML-Workstation med GPU. API'et simulerer opsætning og returnerer et VS Code Remote link.
 
-## Repository Structure
+Application Dev: Hurtig udrulning af standardiserede Web Apps med præ-konfigurerede domænenavne.
 
-```
-cloud-platform/
-├── backend/        # Platform API
-├── frontend/       # Self-service portal
-├── infra/          # Infrastructure as Code
-│   └── terraform/
-├── .github/
-│   └── workflows/
-└── README.md
-```
+Data Engineering: Provisionering af SQL-databaser med automatiske firewall-regler baseret på det valgte miljø.
 
----
-
-## Status
-
-This project is under active development and intended as a learning and demonstration platform.
+## 👨‍💻 Cloud Platform Engineer Refleksion
+Dette projekt demonstrerer min forståelse for den moderne cloud-rejse. I stedet for at lade infrastruktur være en flaskehals, har jeg bygget en løsning, der abstraherer kompleksiteten væk. Ved at bruge Docker Compose til lokal udvikling og .NET Minimal APIs til hurtig eksekvering, viser jeg evnen til at levere værktøjer, der understøtter både udviklerens hastighed og organisationens krav til sikkerhed.
