@@ -1,29 +1,21 @@
-# Environment files
-.env
-.env.*
+# --- Backend (.NET) ---
+**/bin/
+**/obj/
+*.user
+*.userosscache
+*.sln.docstates
 
-# OS
+# --- Frontend (Node/React) ---
+**/node_modules/
+**/dist/
+**/build/
+.eslintcache
+
+# --- OS & IDE ---
+.vscode/
+.idea/
 .DS_Store
 Thumbs.db
 
-# .NET
-bin/
-obj/
-
-# Node / Frontend
-node_modules/
-dist/
-build/
-
-# Terraform
-.terraform/
-*.tfstate
-*.tfstate.backup
-*.tfstate.*
-crash.log
-
-# Logs
-*.log
-
-# VS Code
-.vscode/
+# --- Docker ---
+.dockerignore
