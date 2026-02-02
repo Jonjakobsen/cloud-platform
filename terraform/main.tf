@@ -5,8 +5,13 @@ terraform {
   }
 }
 
-provider "azurerm" { features {} }
-provider "aws" { region = "eu-central-1" }
+provider "azurerm" {
+  features {}
+}
+
+provider "aws" {
+  region = "eu-central-1"
+}
 
 # --- AZURE RESSOURCE GRUPPE ---
 # Oprettes kun hvis CloudProvider er Azure
