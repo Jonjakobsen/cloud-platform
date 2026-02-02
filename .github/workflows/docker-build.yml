@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Backend (C# API)
-        run: docker build ./backend -t cloud-portal-api:test
+        run: docker build ./backend/CloudPlatform.Api -t cloud-portal-api:test
 
       - name: Build Frontend (React)
         run: docker build ./frontend -t cloud-portal-frontend:test
