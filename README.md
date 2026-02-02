@@ -13,7 +13,7 @@ Projektet er bygget med fokus på **Cloud Native** principper og separation of c
 - **Frontend:** React (Vite) – En dynamisk portal, hvor brugere vælger ressourcetype, miljø og cloud-provider.
 - **Backend:** .NET 8 API – En orkestreringsenhed, der mapper brugerønsker til specifikke infrastruktur-konfigurationer.
 - **Containerization:** Docker & Docker Compose – Hele platformen er containeriseret for nem udrulning.
-
+- **CI/CD:** GitHub Actions, der automatisk verificerer builds ved hvert push.
 ---
 
 ## 🚀 Key Features (Targeting Norlys Cloud Platforms)
