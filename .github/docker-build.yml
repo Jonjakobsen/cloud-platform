@@ -1,0 +1,19 @@
+name: Docker Build Check
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Build Backend Image
+        run: docker build ./backend/CloudPlatform.Api -t backend-test
+        
+      - name: Build Frontend Image
+        run: docker build ./frontend -t frontend-test
