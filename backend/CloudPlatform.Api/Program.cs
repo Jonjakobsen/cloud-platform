@@ -25,6 +25,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.MapPost("/api/provision", async (ProvisionRequest request) => {
+    Console.WriteLine($"[Cloud API] Bestilling fra afdeling: {request.Department}");
     Console.WriteLine($"[Cloud API] Modtog bestilling: {request.ResourceType} til {request.ProjectName}");
     
     await Task.Delay(1500); 
@@ -55,4 +56,4 @@ app.MapPost("/api/provision", async (ProvisionRequest request) => {
 
 app.Run();
 
-public record ProvisionRequest(string ProjectName, string Environment, string CloudProvider, string ResourceType);
+public record ProvisionRequest(string ProjectName, string Environment, string CloudProvider, string ResourceType, string Department);

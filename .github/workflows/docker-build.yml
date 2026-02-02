@@ -1,4 +1,4 @@
-name: Docker Build Check
+name: Cloud Portal CI
 
 on:
   push:
@@ -7,13 +7,31 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  # Job 1: Verificer at koden kan bygges (Docker)
+  build-and-verify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      
-      - name: Build Backend Image
-        run: docker build ./backend/CloudPlatform.Api -t backend-test
-        
-      - name: Build Frontend Image
-        run: docker build ./frontend -t frontend-test
+      - name: Checkout kode
+        uses: actions/checkout@v4
+
+      - name: Build Backend (C# API)
+        run: docker build ./backend -t cloud-portal-api:test
+
+      - name: Build Frontend (React)
+        run: docker build ./frontend -t cloud-portal-frontend:test
+
+  # Job 2: Verificer Infrastruktur (Terraform)
+  terraform-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init & Validate
+        run: |
+          cd terraform
+          terraform init -backend=false
+          terraform validate

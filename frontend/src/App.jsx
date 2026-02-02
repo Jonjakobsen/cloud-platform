@@ -6,6 +6,7 @@ function App() {
   const [status, setStatus] = useState('');
   const [environment, setEnvironment] = useState('Development');
   const [cloudProvider, setCloudProvider] = useState('Azure');
+  const [Department, setDepartment] = useState('');
   const [resourceType, setResourceType] = useState('WebApp');
   const [accessLink, setAccessLink] = useState('');
 
@@ -21,7 +22,8 @@ function App() {
           ProjectName: projectName,
           Environment: environment,
           CloudProvider: cloudProvider,
-          ResourceType: resourceType
+          ResourceType: resourceType,
+          Department: Department
         })
       });
 
@@ -54,6 +56,11 @@ function App() {
         <select value={cloudProvider} onChange={(e) => setCloudProvider(e.target.value)}>
           <option value="Azure">Azure</option>
           <option value="AWS">AWS</option>
+        </select>
+
+        <select value={Department} onChange={(e) => setDepartment(e.target.value)}>
+          <option value="IT">IT</option>
+          <option value="Data & Analytics">Data & Analytics</option>
         </select>
 
         <label>Hvad skal du bygge?</label>
